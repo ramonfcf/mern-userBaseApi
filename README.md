@@ -4,7 +4,7 @@ yarn test
 
 2. **Start the Script**
 - Command:
-     yarn start
+     yarn start (This only works if you have a .env file with the correct environment variables, and a database running, with the correct node version)
 
 3. **Database Seed Script**
 - Command:

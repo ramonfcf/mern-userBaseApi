@@ -18,7 +18,7 @@ const port = process.env.LISTENING_PORT;
 connectToMongoDB(() => {
   try {
     app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
+      console.log(`Server is running on port: ${port}`);
     });
   } catch (error) {
     console.log("Error starting server", error);
