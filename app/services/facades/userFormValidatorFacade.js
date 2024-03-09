@@ -1,5 +1,5 @@
-const emailValidator = require("../../services/emailValidator");
-const nameValidator = require("../../services/nameValidator");
+const emailValidator = require("../validators/emailValidator");
+const nameValidator = require("../validators/nameValidator");
 
 class userFormValidatorFacade {
   constructor() {
