@@ -7,9 +7,7 @@ class JwtService {
 
   generateToken() {
     try {
-      return this.jwt.sign(this.secret, {
-        expiresIn: "1h",
-      });
+      return this.jwt.sign({}, this.secret, { expiresIn: "1h" });
     } catch (error) {
       throw new Error("Failed to generate token");
     }
