@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node --watch app/server.js",
     "db-seed": "node app/seeds/seedUsers.js",
     "db-reset": "node app/seeds/resetUsers.js"
