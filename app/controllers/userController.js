@@ -1,4 +1,6 @@
 const userModel = require("../models/userModel");
+const userFormValidatorClass = require("../services/facades/userFormValidatorFacade");
+const userFormValidator = new userFormValidatorClass();
 
 const getAllUsers = async (req, res) => {
   try {
@@ -11,6 +13,12 @@ const getAllUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, email, birthdate } = req.body;
+
+  const dataValidation = userFormValidator.validateData(req.body);
+
+  if (dataValidation !== true) {
+    return res.status(400).json(dataValidation);
+  }
 
   try {
     const user = await userModel.create({ name, email, birthdate });
@@ -30,6 +38,12 @@ const getUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  const dataValidation = userFormValidator.validateData(req.body);
+
+  if (dataValidation !== true) {
+    return res.status(400).json(dataValidation);
+  }
+
   try {
     const user = await userModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
