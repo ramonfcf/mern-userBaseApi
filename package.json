@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch app/server.js"
+    "start": "node --watch app/server.js",
+    "db-seed": "node app/seeds/seedUsers.js"
   },
   "keywords": [],
   "author": "",
