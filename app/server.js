@@ -2,16 +2,18 @@ require("dotenv").config();
 const connectToMongoDB = require("./db/setupDb");
 
 const express = require("express");
-const mongoose = require("mongoose");
+const logger = require("./middleware/loggerMiddleware");
 
 const usersRoutes = require("./routes/v1/usersRoutes");
-const logger = require("./middleware/loggerMiddleware");
+const authRoutes = require("./routes/authRoutes");
+const verifyToken = require("./middleware/verifyTokenMiddleware");
 
 const app = express();
 
 app.use(express.json());
 app.use(logger);
-app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/users", verifyToken, usersRoutes);
+app.use("/auth/", authRoutes);
 
 const port = process.env.LISTENING_PORT;
 
