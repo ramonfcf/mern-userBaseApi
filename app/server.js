@@ -4,18 +4,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const usersRoutes = require("./routes/v1/usersRoutes");
+const logger = require("./middleware/loggerMiddleware");
 
 const app = express();
 
 app.use(express.json());
-
-app.use((req, res, next) => {
-  const timestamp = new Date().toISOString();
-
-  console.log(`${timestamp} - |${req.method}| '${req.path}'`);
-  next();
-});
-
+app.use(logger);
 app.use("/api/v1/users", usersRoutes);
 
 const port = process.env.LISTENING_PORT;
