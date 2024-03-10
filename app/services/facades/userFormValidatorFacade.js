@@ -9,13 +9,14 @@ class userFormValidatorFacade {
 
   validateData(formData) {
     const { name, email } = formData;
+    if (!this.nameValidator.validate(name)) {
+      return { message: "Invalid name format" };
+    }
 
     if (!this.emailValidator.validate(email)) {
       return { message: "Invalid email format" };
     }
-    if (!this.nameValidator.validate(name)) {
-      return { message: "Invalid name format" };
-    }
+
     return true;
   }
 }

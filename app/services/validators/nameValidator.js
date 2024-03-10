@@ -1,5 +1,9 @@
 class NameValidator {
   validate(name) {
+    if (name === undefined) {
+      return true;
+    }
+
     return (
       this.#validNumberOfWords(name) &&
       this.#validateNameFormat(name) &&
