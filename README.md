@@ -1,3 +1,5 @@
+# mern-userBaseApi
+
 ## Setting up MongoDB with Docker Compose
 
 This project includes a Docker Compose configuration file to easily set up a MongoDB database. Follow the steps below to start the MongoDB service using Docker Compose.
@@ -53,3 +55,16 @@ Before running these commands, ensure you have `yarn` installed on your system. 
      ```bash
      yarn db-reset
      ```
+
+## Dependencies
+- [MongoDB](https://www.mongodb.com/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/)
+- [Jest](https://jestjs.io/)
+- [Mongoose](https://mongoosejs.com/)
+- [Express](https://expressjs.com/)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
+- [Cors](https://www.npmjs.com/package/cors)
