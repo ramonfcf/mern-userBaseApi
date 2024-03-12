@@ -1,7 +1,7 @@
 const JwtServiceClass = require("../services/jwtService");
 const jwtService = new JwtServiceClass();
 
-const login = (req, res) => {
+const authenticate = (req, res) => {
   try {
     jwtService.login(req, res);
   } catch (error) {
@@ -9,4 +9,4 @@ const login = (req, res) => {
   }
 };
 
-module.exports = { login };
+module.exports = { authenticate };
