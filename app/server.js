@@ -13,23 +13,9 @@ const app = express();
 
 app.use(express.json());
 app.use(logger);
-app.use("/api/v1/users", cors(), usersRoutes);
+app.use("/api/v1/users", cors(), verifyToken, usersRoutes);
 app.use("/auth/", cors(), authRoutes);
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-);
-
-app.get("/", (req, res) =>
-  res.json({
-    message: "Welcome to the API",
-  })
-);
 const port = process.env.LISTENING_PORT;
 
 connectToMongoDB(() => {

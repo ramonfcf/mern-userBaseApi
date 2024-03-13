@@ -1,11 +1,13 @@
-const { login } = require("../../controllers/authController");
+const { login, authenticate } = require("../../controllers/authController");
 
 const mockJwtServiceLogin = jest.fn();
 
 jest.mock("../../services/jwtService", () => {
   return jest.fn().mockImplementation(() => {
     return {
-      login: () => mockJwtServiceLogin(),
+      authenticate: () => {
+        return { login: mockJwtServiceLogin };
+      },
     };
   });
 });
@@ -16,7 +18,7 @@ describe("authController", () => {
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
     it("should call jwtService.login", () => {
-      login(req, res);
+      authenticate(req, res);
       expect(mockJwtServiceLogin).toHaveBeenCalled();
     });
   });
