@@ -24,7 +24,7 @@ app.use(
   usersRoutes
 );
 app.use(
-  "/auth/*",
+  "/auth/",
   cors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
