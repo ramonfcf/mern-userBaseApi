@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node --watch app/server.js",
+    "start": "node --watch app/index.js",
     "db-seed": "node app/seeds/seedUsers.js",
     "db-reset": "node app/seeds/resetUsers.js"
   },
