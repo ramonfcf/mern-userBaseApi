@@ -13,8 +13,25 @@ const app = express();
 
 app.use(express.json());
 app.use(logger);
-app.use("/api/v1/users", cors(), verifyToken, usersRoutes);
-app.use("/auth/", cors(), authRoutes);
+app.use(
+  "/api/v1/users",
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  }),
+  verifyToken,
+  usersRoutes
+);
+app.use(
+  "/auth/",
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  }),
+  authRoutes
+);
 
 const port = process.env.LISTENING_PORT;
 
