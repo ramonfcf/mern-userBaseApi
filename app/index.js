@@ -44,3 +44,5 @@ connectToMongoDB(() => {
     console.log("Error starting server", error);
   }
 });
+
+module.exports = app
