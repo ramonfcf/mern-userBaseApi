@@ -28,6 +28,10 @@ services:
       - mongo
     networks:
       - mern-network
+    labels:
+    - traefik.enable=true
+    - 'traefik.http.routers.<unique_router_name>.rule=Host(`coolify.io`) && PathPrefix(`/`)'
+    - traefik.http.routers.<unique_router_name>.entryPoints=http
 
 volumes:
   mongo_data: {}
