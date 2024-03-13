@@ -1,6 +1,6 @@
 require("dotenv").config();
-const connectToMongoDB = require("./db/setupDb");
-
+// const connectToMongoDB = require("./db/setupDb");
+const mongoose = require("mongoose");
 const express = require("express");
 const logger = require("./middleware/loggerMiddleware");
 const cors = require("cors");
@@ -35,14 +35,22 @@ app.use(
 
 const port = process.env.LISTENING_PORT;
 
-connectToMongoDB(() => {
+const connectToMongoDB = async (callback) => {
   try {
-    app.listen(port, () => {
-      console.log(`Server is running on port: ${port}`);
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
+    console.log("Connected to MongoDB");
+    await callback();
+    console.log("Disconnected from MongoDB");
   } catch (error) {
-    console.log("Error starting server", error);
+    console.log("Error connecting to MongoDB", error);
   }
-});
+}
 
-module.exports = app
+connectToMongoDB(() => {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+})
