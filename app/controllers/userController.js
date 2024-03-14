@@ -45,7 +45,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const dataValidation = userFormValidator.validateData(req.body);
 
-  if (dataValidation !== true) {
+  if (dataValidation.validation !== true) {
     return res.status(400).json(dataValidation);
   }
 
@@ -55,7 +55,12 @@ const updateUser = async (req, res) => {
     });
     res.json(user);
   } catch (error) {
-    res.status(400).json({ message: "Error updating user: " + error.message });
+    res
+      .status(400)
+      .json({
+        message:
+          "Error updating user: " + error.message || dataValidation.message,
+      });
   }
 };
 

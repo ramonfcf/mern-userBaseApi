@@ -9,7 +9,7 @@ describe("EmailValidator", () => {
     ])("should return true when a valid email (%s) is provided", (email) => {
       const emailValidator = new EmailValidator();
       const result = emailValidator.validate(email);
-      expect(result).toBe(true);
+      expect(result.validation).toBe(true);
     });
 
     test.each([
@@ -25,7 +25,8 @@ describe("EmailValidator", () => {
       (email) => {
         const emailValidator = new EmailValidator();
         const result = emailValidator.validate(email);
-        expect(result).toBe(false);
+        expect(result.validation).toBe(false);
+        expect(result.message).toContain("Invalid email format");
       }
     );
   });

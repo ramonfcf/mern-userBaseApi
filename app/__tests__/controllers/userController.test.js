@@ -40,7 +40,7 @@ describe("userController", () => {
       });
       userModel.create = createMock;
 
-      mockUserFormValidator.validateData.mockReturnValue(true);
+      mockUserFormValidator.validateData.mockReturnValue({ validation: true });
 
       console.log("req.body:", req.body);
 
