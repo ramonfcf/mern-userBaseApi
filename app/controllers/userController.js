@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
 
   const dataValidation = userFormValidator.validateData(req.body);
 
-  if (dataValidation !== true) {
+  if (dataValidation.validation !== true) {
     return res.status(400).json(dataValidation);
   }
 
@@ -26,7 +26,10 @@ const createUser = async (req, res) => {
     const user = await userService.create({ name, email, birthdate });
     res.status(201).json(user);
   } catch (error) {
-    res.status(400).json({ message: "Error creating user: " + error.message });
+    res.status(400).json({
+      message:
+        "Error creating user: " + error.message || dataValidation.message,
+    });
   }
 };
 
