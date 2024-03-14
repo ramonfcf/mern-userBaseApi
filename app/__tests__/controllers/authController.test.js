@@ -5,15 +5,15 @@ const mockJwtServiceLogin = jest.fn();
 jest.mock("../../services/jwtService", () => {
   return jest.fn().mockImplementation(() => {
     return {
-      authenticate: () => {
-        return { login: mockJwtServiceLogin };
+      login: () => {
+        mockJwtServiceLogin();
       },
     };
   });
 });
 
 describe("authController", () => {
-  describe("login", () => {
+  describe("authenticate", () => {
     const req = { body: { username: "your_app", password: "123456" } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 

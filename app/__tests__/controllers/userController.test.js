@@ -40,7 +40,7 @@ describe("userController", () => {
       });
       userModel.create = createMock;
 
-      mockUserFormValidator.validateData.mockReturnValue(true);
+      mockUserFormValidator.validateData.mockReturnValue({ validation: true });
 
       console.log("req.body:", req.body);
 
@@ -86,7 +86,7 @@ describe("userController", () => {
     it("should call userFormValidator.validateData and userModel.findByIdAndUpdate", async () => {
       const mockedUser = { _id: "mockedId", name: "John Doe" };
       userModel.findByIdAndUpdate = jest.fn().mockResolvedValue(mockedUser);
-      mockUserFormValidator.validateData.mockReturnValue(true);
+      mockUserFormValidator.validateData.mockReturnValue({ validation: true });
 
       req.params = { id: "mockedId" };
 

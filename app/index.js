@@ -11,27 +11,13 @@ const verifyToken = require("./middleware/verifyTokenMiddleware");
 
 const app = express();
 
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+};
 app.use(express.json());
 app.use(logger);
-app.use(
-  "/api/v1/users",
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  }),
-  verifyToken,
-  usersRoutes
-);
-app.use(
-  "/auth/",
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  }),
-  authRoutes
-);
+app.use("/api/v1/users", cors(corsOptions), verifyToken, usersRoutes);
+app.use("/auth/", cors(corsOptions), authRoutes);
 
 const port = process.env.LISTENING_PORT;
 
