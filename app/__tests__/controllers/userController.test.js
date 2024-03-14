@@ -42,8 +42,6 @@ describe("userController", () => {
 
       mockUserFormValidator.validateData.mockReturnValue({ validation: true });
 
-      console.log("req.body:", req.body);
-
       await createUser(req, res);
 
       expect(mockUserFormValidator.validateData).toHaveBeenCalledWith(req.body);
