@@ -3,22 +3,18 @@ const connectToMongoDB = require("./db/setupDb");
 
 const express = require("express");
 const logger = require("./middleware/loggerMiddleware");
-const cors = require("cors");
+const corsMiddleware = require("./middleware/corsMiddleware");
+const verifyToken = require("./middleware/verifyTokenMiddleware");
 
 const usersRoutes = require("./routes/v1/usersRoutes");
 const authRoutes = require("./routes/authRoutes");
-const verifyToken = require("./middleware/verifyTokenMiddleware");
 
 const app = express();
 
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN.split(","),
-};
-
 app.use(express.json());
 app.use(logger);
-app.use("/api/v1/users", cors(corsOptions), verifyToken, usersRoutes);
-app.use("/auth/", cors(corsOptions), authRoutes);
+app.use("/api/v1/users", corsMiddleware, verifyToken, usersRoutes);
+app.use("/auth/", corsMiddleware, authRoutes);
 
 const port = process.env.LISTENING_PORT;
 
