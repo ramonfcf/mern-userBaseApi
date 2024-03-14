@@ -23,7 +23,6 @@ app.use("/auth/", cors(corsOptions), authRoutes);
 const port = process.env.LISTENING_PORT;
 
 connectToMongoDB(() => {
-  console.log("corsOptions", corsOptions);
   try {
     app.listen(port, () => {
       console.log(`Server is running on port: ${port}`);
