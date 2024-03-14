@@ -11,25 +11,14 @@ const verifyToken = require("./middleware/verifyTokenMiddleware");
 
 const app = express();
 
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+};
 app.use(express.json());
 app.use(logger);
-app.use("/api/v1/users", cors(), usersRoutes);
-app.use("/auth/", cors(), authRoutes);
+app.use("/api/v1/users", cors(corsOptions), verifyToken, usersRoutes);
+app.use("/auth/", cors(corsOptions), authRoutes);
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-);
-
-app.get("/", (req, res) =>
-  res.json({
-    message: "Welcome to the API",
-  })
-);
 const port = process.env.LISTENING_PORT;
 
 connectToMongoDB(() => {
