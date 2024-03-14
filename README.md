@@ -135,6 +135,13 @@ And there is also a cors middleware to allow requests from the specified origin.
 2. **Include the JWT in the `Authorization` header of the request to access protected routes.**
 
 
+## Deployment
+
+This project is divided into two parts: the server and the client. The server is built with Node.js and Express, and the client is built with React.
+The server is deployed to a VPS server in oracle cloud(vinhedo), and the client is deployed in a VPS server in contabo(germany).
+
+
+
 ## Dependencies
 
 This project uses the following dependencies:
