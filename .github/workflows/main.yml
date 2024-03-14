@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ $default-branch ]
   pull_request:
-    branches: [ main ]
+    branches: [ $default-branch ]
 
 jobs:
   build:
@@ -15,14 +15,14 @@ jobs:
         image: mongo:6
         ports:
           - 27017:27017
-        options: --health-cmd "mongo --eval 'db.runCommand({ connectionStatus: 1 })'"
+        options: --name mongodb
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '14'
     - name: Install Dependencies
       run: npm install
 
@@ -33,4 +33,4 @@ jobs:
       run: npm start &
       env:
         PORT: 3000
-        DATABASE_URL: mongodb://localhost:27017/nomeDoSeuDatabase
+        DATABASE_URL: mongodb://localhost:27017/mongodb
