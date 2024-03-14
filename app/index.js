@@ -13,6 +13,11 @@ const app = express();
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN.split(","),
+  optionsSuccessStatus: 200,
+  methods: "GET, POST, PATCH, DELETE",
+  allowedHeaders: "Content-Type, Authorization",
+  credentials: true,
+  preflightContinue: false,
 };
 
 app.use(express.json());
