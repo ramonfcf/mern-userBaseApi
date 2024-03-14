@@ -12,8 +12,9 @@ const verifyToken = require("./middleware/verifyTokenMiddleware");
 const app = express();
 
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: process.env.CORS_ORIGIN.split(","),
 };
+
 app.use(express.json());
 app.use(logger);
 app.use("/api/v1/users", cors(corsOptions), verifyToken, usersRoutes);
@@ -22,6 +23,7 @@ app.use("/auth/", cors(corsOptions), authRoutes);
 const port = process.env.LISTENING_PORT;
 
 connectToMongoDB(() => {
+  console.log("corsOptions", corsOptions);
   try {
     app.listen(port, () => {
       console.log(`Server is running on port: ${port}`);
@@ -30,3 +32,5 @@ connectToMongoDB(() => {
     console.log("Error starting server", error);
   }
 });
+
+module.exports = app;
