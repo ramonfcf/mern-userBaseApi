@@ -1,39 +1,21 @@
 name: CI
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-    types:
-      - opened
-      - synchronize
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo:6
-        ports:
-          - 27017:27017
-        options: --name mongodb
-
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
-    - name: Install Dependencies
+        node-version: '18.x'
+
+    - name: Install dependencies
       run: npm install
 
-    - name: Run Tests
+    - name: Run tests
       run: npm test
-
-    - name: Start Server
-      run: npm start &
-      env:
-        PORT: 3000
-        DATABASE_URL: mongodb://localhost:27017/mongodb
